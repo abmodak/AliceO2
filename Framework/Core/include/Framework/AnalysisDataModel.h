@@ -1136,31 +1136,6 @@ DECLARE_SOA_TABLE(CPVClusters, "AOD", "CPVCLUSTER", //! CPV clusters
                   cpvcluster::ModuleNumber<cpvcluster::ClusterStatus>, cpvcluster::IsUnfolded<cpvcluster::ClusterStatus>);
 using CPVCluster = CPVClusters::iterator;
 
-namespace pmd
-{
-DECLARE_SOA_INDEX_COLUMN(BC, bc);                    //! BC index
-DECLARE_SOA_COLUMN(X, clsx, float);                  //! cluster x position
-DECLARE_SOA_COLUMN(Y, clsy, float);                  //! cluster y position
-DECLARE_SOA_COLUMN(Z, clsz, float);                  //! cluster z position
-DECLARE_SOA_COLUMN(CluADC, clsadc, float);           //! cluster energy in ADC
-DECLARE_SOA_COLUMN(CluPID, clspid, float);           //! cluster probability, 1: photon, 0:hadron
-DECLARE_SOA_COLUMN(Det, det, uint8_t);               //! Detector, 0:PRE, 1:CPV
-DECLARE_SOA_COLUMN(Ncell, ncell, uint8_t);           //! cluster cells
-DECLARE_SOA_COLUMN(Smn, pmdmodule, int32_t);         //! module number
-DECLARE_SOA_COLUMN(TrackNo, trackno, int32_t);       //! Track number assigned to clus from simulation
-DECLARE_SOA_COLUMN(TrackPid, trackpid, int32_t);     //! Track PID assigned to clus from simulation
-DECLARE_SOA_COLUMN(SigX, sigx, float);               //! Cluster x-width
-DECLARE_SOA_COLUMN(SigY, sigy, float);               //! Cluster y-width
-DECLARE_SOA_COLUMN(ClMatching, clmatching, int32_t); //! Cluster of PRE matching with CPV
-} // namespace pmd
-
-DECLARE_SOA_TABLE(Pmds, "AOD", "PMD", //! Photon information from PMD detector
-                  o2::soa::Index<>, pmd::BCId, pmd::X, pmd::Y,
-                  pmd::Z, pmd::CluADC, pmd::CluPID, pmd::Det,
-                  pmd::Ncell, pmd::Smn, pmd::TrackNo, pmd::TrackPid,
-                  pmd::SigX, pmd::SigY, pmd::ClMatching);
-using Pmd = Pmds::iterator;
-
 namespace zdc
 {
 DECLARE_SOA_INDEX_COLUMN(BC, bc);                               //! BC index, to be used by both legacy and new table
@@ -1772,6 +1747,19 @@ DECLARE_SOA_COLUMN(V0TriggerChargeA, v0TriggerChargeA, uint16_t);     //! V0A tr
 DECLARE_SOA_COLUMN(V0TriggerChargeC, v0TriggerChargeC, uint16_t);     //! V0C trigger charge
 DECLARE_SOA_COLUMN(NTPCClusters, nTPCClusters, uint32_t);             //! total number of TPC clusters (for ev sel)
 DECLARE_SOA_COLUMN(NSDDSSDClusters, nSDDSSDClusters, uint32_t);       //! total number of SSD + SDD clusters (for ev sel)
+DECLARE_SOA_COLUMN(X, pmdclsx, float);                  //! cluster x position
+DECLARE_SOA_COLUMN(Y, pmdclsy, float);                  //! cluster y position
+DECLARE_SOA_COLUMN(Z, pmdclsz, float);                  //! cluster z position
+DECLARE_SOA_COLUMN(CluADC, pmdclsadc, float);           //! cluster energy in ADC
+DECLARE_SOA_COLUMN(CluPID, pmdclspid, float);           //! cluster probability, 1: photon, 0:hadron
+DECLARE_SOA_COLUMN(Det, pmddet, uint8_t);               //! Detector, 0:PRE, 1:CPV
+DECLARE_SOA_COLUMN(Ncell, pmdncell, uint8_t);           //! cluster cells
+DECLARE_SOA_COLUMN(Smn, pmdmodule, int32_t);         //! module number
+DECLARE_SOA_COLUMN(TrackNo, pmdtrackno, int32_t);       //! Track number assigned to clus from simulation
+DECLARE_SOA_COLUMN(TrackPid, pmdtrackpid, int32_t);     //! Track PID assigned to clus from simulation
+DECLARE_SOA_COLUMN(SigX, pmdsigx, float);               //! Cluster x-width
+DECLARE_SOA_COLUMN(SigY, pmdsigy, float);               //! Cluster y-width
+DECLARE_SOA_COLUMN(ClMatching, pmdclmatching, int32_t); //! Cluster of PRE matching with CPV
 namespace oftv0
 {
 DECLARE_SOA_INDEX_COLUMN(Collision, collision);                         //! Collision index
@@ -1808,7 +1796,10 @@ DECLARE_SOA_TABLE_VERSIONED(Run2BCInfos_001, "AOD", "RUN2BCINFO", 1,
                             run2::SPDFiredChipsL0, run2::SPDFiredChipsL1,
                             run2::SPDFiredFastOrL0, run2::SPDFiredFastOrL1,
                             run2::V0TriggerChargeA, run2::V0TriggerChargeC,
-                            run2::NTPCClusters, run2::NSDDSSDClusters);
+                            run2::NTPCClusters, run2::NSDDSSDClusters,
+                            run2::X, run2::Y, run2::Z, run2::CluADC, run2::CluPID, 
+                            run2::Det, run2::Ncell, run2::Smn, run2::TrackNo, 
+                            run2::TrackPid, run2::SigX, run2::SigY, run2::ClMatching);
 
 using Run2BCInfos = Run2BCInfos_001;
 using Run2BCInfo = Run2BCInfos::iterator;
