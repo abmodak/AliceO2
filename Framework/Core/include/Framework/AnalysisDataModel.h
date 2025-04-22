@@ -1800,10 +1800,7 @@ DECLARE_SOA_TABLE_VERSIONED(Run2BCInfos_001, "AOD", "RUN2BCINFO", 1,
                             run2::SPDFiredChipsL0, run2::SPDFiredChipsL1,
                             run2::SPDFiredFastOrL0, run2::SPDFiredFastOrL1,
                             run2::V0TriggerChargeA, run2::V0TriggerChargeC,
-                            run2::NTPCClusters, run2::NSDDSSDClusters,
-                            run2::X, run2::Y, run2::Z, run2::CluADC, run2::CluPID,
-                            run2::Det, run2::Ncell, run2::Smn, run2::TrackNo,
-                            run2::TrackPid, run2::SigX, run2::SigY, run2::ClMatching);
+                            run2::NTPCClusters, run2::NSDDSSDClusters);
 
 using Run2BCInfos = Run2BCInfos_001;
 using Run2BCInfo = Run2BCInfos::iterator;
